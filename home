@@ -1,0 +1,41 @@
+<?php
+require_once './MyCalculator.php';
+include_once 'common.php';
+$calc = new Calculator();
+  if (isset($_POST['action']) && $_POST['action'] == 'calculate') {
+  $calc->setFirstNum($_POST['value1']);
+  $calc->setOperator($_POST['operator']);
+  $calc->setSecondNum($_POST['value2']);
+  
+  $result = $calc->getFirstNum() . ' ' . $calc->getOperator() . ' ' . $calc->getSecondNum() . ' = ' . $calc->calculate();
+}
+
+?>
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="Generator" content="Design-Lib.Com - Basic Web Page Layouts Creator 1.0">
+<title><?php echo $lang['PAGE_TITLE']; ?></title>
+ </head>
+    <body>
+	<table border=2>
+	<tr><td colspan=3><font color="green" size=5><b><?php echo $lang['HEADER_TITLE']; ?></b><br></font></td></tr>
+	<tr><td><p><font color="pink" size="4" ><b><?php echo $lang['Select']; ?>&nbsp;</font></b></td>
+	<td><a href="home.php?lang=en">English</a></td>
+	<td><a href="home.php?lang=ta">Tamil</a></p></td></tr>
+	<form action="home.php" method="post" >
+	<tr><td colspan=3><input type="hidden" name="action" value="calculate"></td></tr>
+	<tr><td><?php echo $lang['First_Value']; ?> </td><td colspan=2><input type="text" name="value1" size="6" /></td></tr>
+	<tr><td><?php echo $lang['Second_Value']; ?></td><td colspan=2><input type="text" name="value2" size="6"/></td></tr>
+	<tr><td> <?php echo $lang['Select_Operation']; ?></td>
+	<td><input type="submit" name="operator" value="+"></td>
+	<td><input type="submit" name="operator" value="-"></td></tr>
+	<tr><td><font color="FB0383"><?php echo (isset($result)) ? $result : ""?></font></td><td><input type="submit" name="operator" value="*"></td>
+	<td><input type="submit" name="operator" value="/"></td></tr></table>
+                       
+
+</form>
+
+
+</html>
